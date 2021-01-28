@@ -27,8 +27,7 @@ class CircularQueue:
         if self.head == -1:
             print("Queue is Empty")
             return
-
-        
+                    
         temp = self.queue[self.head]
         self.queue[self.head] = None
         if self.head == self.rear:
@@ -63,4 +62,4 @@ print(q)
 print("Deque: ",q.dequeue())
 print(q)
 print("Deque: ",q.dequeue())
-print(q)    
+print(q)
