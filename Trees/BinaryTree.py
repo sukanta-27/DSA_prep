@@ -58,6 +58,30 @@ class Tree:
 
             i += 1
 
+    def __heightUtil(self, node):
+        if not node:
+            return 0
+        
+        x = self.__heightUtil(node.left)
+        y = self.__heightUtil(node.right)
+
+        return max(x,y) + 1
+    
+    def height(self):
+        return self.__heightUtil(self.root)
+
+    def __countUtil(self, node):
+        if not node:
+            return 0
+        
+        x = self.__countUtil(node.left)
+        y = self.__countUtil(node.right)
+        
+        return x + y + 1
+
+    def count(self):
+        return self.__countUtil(self.root)
+
     def preorder(self, node):
         if node:
             print(node.data, end=" ")
@@ -94,6 +118,8 @@ def main():
     inputArray = input().split()
     tree = Tree(inputArray)
     print(tree)
+    print("Height of Tree: ", tree.height())
+    print("Number of nodes: ", tree.count())
 
 if __name__ == '__main__':
     main()
