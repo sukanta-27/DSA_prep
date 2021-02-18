@@ -96,14 +96,39 @@ class BST:
         return max
 
     def __inorderSuccessor(self, node):
-        pass
+        node = node.right
+        while node.left:
+            node = node.left
+        return node.data
 
     def __inorderPredecessor(self, node):
-        pass
+        node = node.left
+        while node.right:
+            node = node.right
+        return node.data
     
-    def delete(self, item):
-        pass
-
+    def delete(self, node, item):
+        if not node:
+            return None
+        
+        if node.data > item:
+            node.left =  self.delete(node.left, item)
+        elif node.data < item:
+            node.right = self.delete(node.right, item)
+        else:
+            # Case 1: If node is a leaf node
+            if not (node.left or node.right):
+                node = None
+            # Case 2: If there is a right child, replace with inorder successor
+            elif node.right:
+                node.data = self.__inorderSuccessor(node)
+                node.right = self.delete(node.right, node.data)
+            # Case 3: If there is no right child, replace with inorder predecessor
+            else:
+                node.data = self.__inorderPredecessor(node)
+                node.left = self.delete(node.left, node.data)
+        return node
+        
     def __inorder(self, node):
         if not node:
             return
@@ -129,6 +154,12 @@ def main():
     print("Max is: ", bst.max())
     print(bst.search(bst.root, 7))
     print(bst.search(bst.root, 3))
+    
+    t = int(input("********\n Enter the number of items you want to delete: "))
+    for _ in range(t):
+        x = int(input())
+        bst.delete(bst.root, x)
+        print(bst)
 
 if __name__ == "__main__":
     main()
