@@ -39,7 +39,11 @@ def iterativeInorder(tree):
     print()
 
         
+def iterativePostorderWith1Stack(root):
+    pass
 
+def iterativePostorderWith2Stacks(root):
+    pass
 
     
 def main():

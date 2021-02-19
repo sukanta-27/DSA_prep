@@ -82,6 +82,17 @@ class Tree:
     def count(self):
         return self.__countUtil(self.root)
 
+    def __countLeafs(self, node):
+        if not node:
+            return 0
+        if not (node.left or node.right):
+            return 1
+        
+        return self.__countLeafs(node.left) + self.__countLeafs(node.right)
+
+    def countLeafs(self):
+        return self.__countLeafs(self.root)
+
     def preorder(self, node):
         if node:
             print(node.data, end=" ")
@@ -120,6 +131,7 @@ def main():
     print(tree)
     print("Height of Tree: ", tree.height())
     print("Number of nodes: ", tree.count())
+    print("Number of leafs: ", tree.countLeafs())
 
 if __name__ == '__main__':
     main()
