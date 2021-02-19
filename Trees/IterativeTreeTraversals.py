@@ -39,11 +39,56 @@ def iterativeInorder(tree):
     print()
 
         
-def iterativePostorderWith1Stack(root):
-    pass
+def iterativePostorderWith1Stack(tree):
+    if not tree.root:
+        return []
+    prev = None
+    stack = [tree.root]
+    result = []
 
-def iterativePostorderWith2Stacks(root):
-    pass
+    while stack:
+        current = stack[-1]
+        # Case 1
+        if prev == None or prev.left == current or prev.right == current:
+
+            if current.left:
+                stack.append(current.left)
+            elif current.right:
+                stack.append(current.right)
+            else:
+                result.append(current.data)
+                stack.pop()
+        # Case 2
+        elif prev == current.left:
+            if current.right:
+                stack.append(current.right)
+        # Case 3
+        else:
+            result.append(current.data)
+            stack.pop()
+        
+        prev = current
+    
+    print(*result)
+
+def iterativePostorderWith2Stacks(tree):
+    if not tree.root:
+        return []
+    
+    stack1 = [tree.root]
+    stack2 = []
+
+    while stack1:
+        current = stack1.pop()
+        stack2.append(current.data)
+
+        if current.left:
+            stack1.append(current.left)
+        if current.right:
+            stack1.append(current.right)
+    
+    print(*stack2[::-1])
+
 
     
 def main():
@@ -55,5 +100,12 @@ def main():
 
     print("Iterative Inorder: ")
     iterativeInorder(tree)
+
+    print("Iterative Postorder with 2 stacks: ")
+    iterativePostorderWith2Stacks(tree)
+
+    print("Iterative Postorder with 1 stack: ")
+    iterativePostorderWith1Stack(tree)
+
 if __name__ == '__main__':
     main()
