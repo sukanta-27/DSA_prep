@@ -35,6 +35,3 @@ if __name__ == '__main__':
         graph.add_edge(s, d)
     
     print(*BFS(int(input("Enter the starting vertex: ")), graph))
-
-    
-
